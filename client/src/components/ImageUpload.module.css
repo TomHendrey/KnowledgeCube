@@ -1,0 +1,35 @@
+/* Upload Container */
+.uploadContainer {
+    margin-top: 10px;
+    text-align: left;
+}
+
+/* Upload Box Styling */
+.uploadBox {
+    border: 2px dashed #aaa;
+    padding-left: 25px;
+    padding-right: 10px;
+    padding-top: 2px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    color: #333;
+    font-family: 'Open Sans', sans-serif;
+    width: 190px;
+}
+
+.uploadBox:hover {
+    border-color: #555;
+    background-color: #f9f9f9;
+}
+
+.imagePreview img {
+    max-width: 100%;
+    max-height: 500px;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin: 0 auto;
+    margin-top: 20px;
+}

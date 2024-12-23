@@ -1,0 +1,160 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: #333;
+    color: #c4c4c4;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box; /* Ensure padding does not affect width */
+}
+
+.navbar .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 30px;
+}
+
+/* Logo styles */
+.logo {
+    margin-left: 30px;
+}
+
+/* Navbar links */
+.navList {
+    list-style: none;
+    padding-left: 0px;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding-right: 30px;
+    align-items: center; /* Align items vertically in the center */
+}
+
+/* Navbar links */
+.navLinks {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+    padding-right: 15px;
+    display: flex;
+    align-items: center; /* Center text vertically */
+    padding: 10px 10px;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 5px;
+}
+
+.navLinks:hover {
+    background-color: #212121;
+    color: #ffffff;
+}
+
+/* Customize the button appearance */
+button {
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    padding: 10px 10px;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    align-items: center; /* Align button content in the center */
+}
+
+/* Add hover effect for button */
+button:hover {
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+/* Responsive Navbar */
+@media (max-width: 540px) {
+    .navbar {
+        button {
+            font-size: 14px;
+            padding-top: 3px;
+        }
+
+        .navList {
+            font-size: 14px;
+            padding-top: 3px;
+            width: 100vw; /* Make sure the width takes full screen width */
+            left: 0;
+            margin: 0; /* Reset margin */
+        }
+
+        .navLinks {
+            padding: 8px 10px; /* Adjust padding to fit smaller screens better */
+        }
+    }
+
+    .navLinks {
+        padding: 3px;
+        margin: 0; /* Ensure no extra margin is added */
+    }
+
+    .navList {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        background-color: #333;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        padding: 5px;
+        gap: 10px;
+        justify-content: center;
+        margin: 0; /* Reset margin */
+        box-sizing: border-box; /* Ensure padding is accounted for */
+    }
+
+    .navList li {
+        text-align: center;
+        padding: 3px 0;
+        margin: 0; /* Reset margin for proper alignment */
+    }
+
+    .hamburgerIcon {
+        display: flex;
+        order: 1;
+    }
+
+    .logo {
+        order: 0;
+    }
+}
+
+@media (max-width: 400px) {
+    button {
+        font-size: 14px;
+        padding-top: 3px;
+    }
+
+    .navList {
+        font-size: 14px;
+        padding-top: 3px;
+        width: 100vw; /* Make sure the width takes full screen width */
+        left: 0;
+        margin: 0; /* Reset margin */
+    }
+
+    .navLinks {
+        padding: 8px 10px; /* Adjust padding to fit smaller screens better */
+    }
+}

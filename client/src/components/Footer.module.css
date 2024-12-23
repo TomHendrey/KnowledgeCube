@@ -1,0 +1,90 @@
+/* Ensure body takes full height */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Full viewport height */
+    margin: 0;
+}
+
+.footer {
+    background-color: #252525;
+    color: #c4c4c4;
+    padding: 0px 0;
+    text-align: left;
+    width: 100%;
+    min-height: 120px; /* Ensures the footer has a minimum height */
+    font-size: 14px;
+    color: #c4c4c4;
+    margin-top: auto;
+    box-sizing: border-box; /* Ensure padding does not affect width */
+}
+
+.footer .container {
+    font-family: 'Open Sans', sans-serif;
+    width: 100%;
+    max-width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+}
+
+.footer p {
+    color: #c4c4c4;
+    margin: 0;
+    font-size: 14px;
+}
+
+.footerEmail {
+    font-size: 14px;
+    color: #c4c4c4;
+    padding-top: 37px;
+}
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .footer .container {
+        text-align: center; /* Center-align text for small screens */
+
+        align-items: center; /* Center-align all items */
+        padding: 20px; /* Ensure some padding on small screens */
+        max-width: 80%;
+    }
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer .container {
+        text-align: center; /* Center-align text for small screens */
+
+        align-items: center; /* Center-align all items */
+        padding: 20px; /* Ensure some padding on small screens */
+        max-width: 80%;
+    }
+
+    .footer .footerEmail {
+        margin-left: 0; /* Reset margin for small screens */
+        margin-top: 0px; /* Add space between copyright and email on small screens */
+    }
+
+    .footer .links {
+        display: flex;
+        flex-direction: column; /* Stack the links vertically on small screens */
+        margin-top: 15px;
+        text-align: center; /* Center align the links */
+    }
+
+    .footerLink {
+        margin: 5px 0; /* Add margin for spacing between links */
+    }
+}
+
+@media (max-width: 400px) {
+    .footer .container {
+        padding: 10px; /* Reduce padding for even smaller screens */
+        flex-direction: column; /* Stack the elements vertically on small screens */
+    }
+
+    .footer .footerEmail {
+        font-size: 12px; /* Slightly smaller font size for small screens */
+    }
+}

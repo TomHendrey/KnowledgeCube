@@ -1,0 +1,220 @@
+.container {
+    background-color: #f4f3f2;
+}
+
+.lessonContainer {
+    max-width: 900px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 5rem;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.lessonContent {
+    text-align: center;
+    margin-bottom: 4rem;
+    margin-top: 2rem;
+}
+
+.lessonContent::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #adadad;
+    margin: 8px auto 0;
+}
+
+.lessonNumber {
+    font-family: 'Playfair Display', 'Roboto', sans-serif;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #bebebe;
+    margin-bottom: 10px;
+}
+
+.lessonHeader {
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.lessonHeader::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #adadad;
+    margin-bottom: 80px;
+}
+
+.lessonTitle {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.lessonDescription {
+    margin-top: 50px;
+    font-size: 1.5rem;
+    color: #555;
+    text-align: left;
+    display: block;
+    margin-top: 90px;
+}
+
+.lessonDescription::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #adadad;
+    margin-top: 20px;
+}
+
+.videoContainer {
+    margin-bottom: 1.5rem;
+}
+
+.lessonImage {
+    max-width: 100%;
+    max-height: 800px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.lessonText {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #444;
+    text-align: left;
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+    padding: 10px;
+    white-space: pre-line;
+    word-break: keep-all;
+}
+
+.pdfLink {
+    position: relative;
+    left: 0;
+    margin-bottom: 2rem;
+    text-align: left;
+    display: block;
+}
+
+.blackContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.pdfContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.previousContainer {
+    display: inline-block;
+    margin-right: 620px;
+    margin-top: 20px;
+}
+
+.nextContainer {
+    display: inline-block;
+}
+
+.footerNavigation {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.sampleLinks {
+    font-family: 'Playfair Display', 'Roboto', sans-serif;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+}
+
+.sampleLink {
+    color: #758c95;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.sampleLink:hover {
+    background-color: #e8f0f5;
+    color: #153e56;
+}
+
+.sampleLink:active {
+    background-color: #ccdfe7;
+}
+
+@media (max-width: 700px) {
+    .lessonContainer {
+        max-width: 900px;
+        height: 100%;
+        margin: 0 auto;
+        padding: 4rem;
+        background-color: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+}
+
+@media (max-width: 550px) {
+    .footerNavigation {
+        flex-direction: column; /* Stack the buttons vertically */
+        align-items: left; /* Center the buttons horizontally */
+        gap: 10px; /* Add space between the buttons */
+    }
+
+    .lessonContainer {
+        max-width: 900px;
+        height: 100%;
+        margin: 0 auto;
+        padding: 3rem;
+        background-color: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+}
+
+@media (max-width: 470px) {
+    .lessonContainer {
+        max-width: 900px;
+        height: 100%;
+        margin: 0 auto;
+        padding: 1.5em;
+        background-color: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .lessonContainer {
+        padding: 1.5rem;
+        padding-top: 4rem;
+    }
+}

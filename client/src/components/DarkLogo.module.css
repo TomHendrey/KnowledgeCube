@@ -1,0 +1,45 @@
+/* Overall container for the logo */
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 26px; /* Same size as the page titles */
+    font-weight: bold;
+}
+
+/* text container */
+
+.text {
+    display: flex;
+    align-items: baseline;
+}
+
+/* Styling for 'Knowledge' */
+.knowledge {
+    font-family: 'Playfair Display', 'Roboto', sans-serif;
+    color: rgb(37, 36, 36); /* White color */
+    margin-right: 5px; /* Space between 'Knowledge' and 'Cube' */
+}
+
+/* Styling for 'Cube' */
+.cube {
+    font-family: 'Playfair Display', 'Roboto', sans-serif;
+    color: #b0b0b0; /* Dark gray color */
+}
+
+.k {
+    font-family: 'Playfair Display', 'Roboto', sans-serif;
+    color: rgb(226, 226, 226); /* White color */
+    font-size: 28px;
+}
+
+.c {
+    font-family: 'Playfair Display', 'Roboto', sans-serif;
+    color: #242222; /* Dark gray color */
+    font-size: 28px;
+}
+.cubeIcon {
+    width: 30px; /* Set the size of the icon */
+    height: auto;
+    margin-left: 5px; /* Adjust the space between the text and the icon */
+    padding-top: 5px;
+}
