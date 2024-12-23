@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create an axios instance
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:5001/api',
+    baseURL: 'https://knowledgecube-srfe.onrender.com/api',
 });
 
 // Interceptors to attach the token to every request

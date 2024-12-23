@@ -40,7 +40,7 @@ const CourseCreatorDashboard = () => {
                     {courses.map((course) => (
                         <div key={course._id} className={styles['course-card']}>
                             <img
-                                src={`http://localhost:5001${course.image}`}
+                                src={`https://knowledgecube-srfe.onrender.com${course.image}`}
                                 alt={course.title}
                                 className={styles['course-image']}
                             />

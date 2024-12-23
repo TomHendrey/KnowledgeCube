@@ -87,7 +87,7 @@ const CourseDiscovery = () => {
                             <div key={course._id} className={styles['course-card']}>
                                 {course.image && (
                                     <img
-                                        src={`http://localhost:5001${course.image}`} // Full image URL
+                                        src={`https://knowledgecube-srfe.onrender.com${course.image}`} // Full image URL
                                         alt={course.title}
                                         className={styles['course-image']}
                                     />

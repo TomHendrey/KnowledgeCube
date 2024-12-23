@@ -29,7 +29,7 @@ const LearnerDashboard = () => {
     const renderCourseCard = (course) => (
         <div key={course.courseId} className={styles['course-card']}>
             <img
-                src={`http://localhost:5001${course.image}`}
+                src={`https://knowledgecube-srfe.onrender.com${course.image}`}
                 alt={`${course.title} cover`}
                 className={styles['course-image']}
             />

@@ -62,7 +62,7 @@ const LearnerLessonPage = () => {
                     {lesson.images?.length > 0 && (
                         <div className={styles.imageContainer}>
                             <img
-                                src={`http://localhost:5001${lesson.images[0]}`}
+                                src={`https://knowledgecube-srfe.onrender.com${lesson.images[0]}`}
                                 alt={lesson.lessonTitle}
                                 className={styles.lessonImage}
                             />
@@ -72,7 +72,7 @@ const LearnerLessonPage = () => {
                     <p className={styles.lessonText}>{lesson.lessonContent}</p>
                     {lesson.pdf && (
                         <a
-                            href={`http://localhost:5001${lesson.pdf}`}
+                            href={`https://knowledgecube-srfe.onrender.com${lesson.pdf}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className={styles.pdfLink}

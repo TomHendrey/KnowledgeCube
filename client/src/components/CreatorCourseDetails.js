@@ -39,7 +39,7 @@ const CourseDetails = () => {
             <div className={styles.contentContainer}>
                 <div className={styles.courseHeader}>
                     <img
-                        src={`http://localhost:5001${course?.image}`}
+                        src={`https://knowledgecube-srfe.onrender.com${course?.image}`}
                         alt={course?.title}
                         className={styles.courseImage}
                     />
@@ -64,8 +64,8 @@ const CourseDetails = () => {
                                                 <img
                                                     src={
                                                         lesson.images?.length > 0
-                                                            ? `http://localhost:5001${lesson.images[0]}`
-                                                            : `http://localhost:5001/uploads/lesson-placeholder.jpg`
+                                                            ? `https://knowledgecube-srfe.onrender.com${lesson.images[0]}`
+                                                            : `https://knowledgecube-srfe.onrender.com/uploads/lesson-placeholder.jpg`
                                                     }
                                                     alt={lesson.lessonTitle}
                                                     className={styles.lessonImage}
