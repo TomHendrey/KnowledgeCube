@@ -1,5 +1,6 @@
 import multer from 'multer';
 import path from 'path';
+import fs from 'fs';
 
 // Define storage location for files
 const storage = multer.diskStorage({
@@ -15,12 +16,17 @@ const storage = multer.diskStorage({
         } else {
             return cb(new Error('Unsupported file type.'));
         }
-        cb(null, uploadDir); // Save the file to the determined directory
+
+        // Ensure the directory exists (redundant, but a safety net)
+        fs.mkdir(uploadDir, { recursive: true }, (err) => {
+            if (err) {
+                return cb(err); // Handle error if directory creation fails
+            }
+            cb(null, uploadDir);
+        });
     },
     filename: (req, file, cb) => {
-        // Extract the file extension and normalize it to lowercase
         const fileExt = path.extname(file.originalname).toLowerCase();
-        // Generate the file name with a timestamp and sanitized original name
         const fileName = `${Date.now()}-${file.originalname.replace(/\s+/g, '_').replace(fileExt, '')}${fileExt}`;
         cb(null, fileName);
     },
