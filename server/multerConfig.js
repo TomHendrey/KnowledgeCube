@@ -1,10 +1,5 @@
 import multer from 'multer';
 import path from 'path';
-import { fileURLToPath } from 'url';
-
-// Get the directory name from the current file URL
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 // Define storage location for files
 const storage = multer.diskStorage({
@@ -12,11 +7,11 @@ const storage = multer.diskStorage({
         let uploadDir;
 
         if (file.mimetype.startsWith('image/')) {
-            uploadDir = path.join(__dirname, 'uploads', 'images'); // For images
+            uploadDir = '/uploads/images'; // Persistent disk path for images
         } else if (file.mimetype === 'application/pdf') {
-            uploadDir = path.join(__dirname, 'uploads', 'pdfs'); // For PDFs
+            uploadDir = '/uploads/pdfs'; // Persistent disk path for PDFs
         } else if (file.mimetype.startsWith('video/')) {
-            uploadDir = path.join(__dirname, 'uploads', 'videos'); // For videos
+            uploadDir = '/uploads/videos'; // Persistent disk path for videos
         } else {
             return cb(new Error('Unsupported file type.'));
         }
