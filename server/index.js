@@ -25,10 +25,20 @@ connectDB();
 
 // Configure CORS to handle preflight requests explicitly
 const corsOptions = {
-    origin: 'http://localhost:3000', // Adjust based on your frontend URL
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'], // Allowed headers
+    origin: [
+        'http://localhost:3000', // Local development
+        'https://gleaming-yeot-1d8a22.netlify.app', // Deployed frontend
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    credentials: true, // Include cookies if needed
 };
+
+// Middleware CORS setup
+app.use(cors(corsOptions));
+
+// Explicitly handle preflight OPTIONS requests
+app.options('*', cors(corsOptions));
 
 // Middleware to log all incoming requests
 app.use((req, res, next) => {
@@ -45,11 +55,6 @@ app.use('/uploads/images', express.static(path.join(__dirname, 'uploads/images')
 
 // Serve static files from the uploads/pdfs directory
 app.use('/uploads/pdfs', express.static(path.join(__dirname, 'uploads/pdfs')));
-
-// Middleware CORS setup
-app.use(cors(corsOptions)); // Apply CORS policy
-
-app.options('*', cors(corsOptions)); // Explicitly handle preflight OPTIONS requests
 
 app.use(express.json()); // Parse incoming JSON requests
 
