@@ -12,11 +12,11 @@ const storage = multer.diskStorage({
         let uploadDir;
 
         if (file.mimetype.startsWith('image/')) {
-            uploadDir = path.join('/uploads', 'images'); // For images
+            uploadDir = path.join(__dirname, 'uploads', 'images'); // For images
         } else if (file.mimetype === 'application/pdf') {
-            uploadDir = path.join('/uploads', 'pdfs'); // For PDFs
+            uploadDir = path.join(__dirname, 'uploads', 'pdfs'); // For PDFs
         } else if (file.mimetype.startsWith('video/')) {
-            uploadDir = path.join('/uploads', 'videos'); // For videos
+            uploadDir = path.join(__dirname, 'uploads', 'videos'); // For videos
         } else {
             return cb(new Error('Unsupported file type.'));
         }
