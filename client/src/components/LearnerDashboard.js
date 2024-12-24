@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axiosInstance from '../axiosConfig.js';
 import styles from './LearnerDashboard.module.css';
 import { useNavigate } from 'react-router-dom';
+import Spinner from './Spinner'; // Import the Spinner component
 
 const LearnerDashboard = () => {
     const [enrolledCourses, setEnrolledCourses] = useState([]);
@@ -60,10 +61,8 @@ const LearnerDashboard = () => {
                 <p className={styles['page-description']}>
                     Here you can browse through your enrolled courses and keep track of your progress.
                 </p>
-
-                {loading && <p>Loading your dashboard...</p>}
+                {loading && <Spinner />} {/* Replace loading text with Spinner */}
                 {error && <p className={styles['error']}>{error}</p>}
-
                 {!loading && !error && (
                     <div className={styles['course-list']}>
                         {enrolledCourses.length === 0 ? (

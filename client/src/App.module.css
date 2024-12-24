@@ -1,0 +1,22 @@
+.appContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh + 350px); /* Subtracts header and footer height to ensure enough content area */
+}
+
+header {
+    flex-shrink: 0; /* Keeps the header at the top */
+}
+
+.mainContent {
+    flex-grow: 1; /* Expands the main content to push the footer to the bottom */
+    padding: 20px; /* Optional spacing for your content */
+}
+
+footer {
+    flex-shrink: 0; /* Keeps the footer at the bottom */
+    background-color: #333; /* Customize as needed */
+    color: #fff;
+    text-align: center;
+    padding-top: 10px;
+}

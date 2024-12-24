@@ -65,7 +65,7 @@ const CourseDiscovery = () => {
             <div className={styles['card-container']}>
                 <h2 className={styles.title}>Discover Courses</h2>
                 <p className={styles['page-description']}>
-                    Plese serch below fo any subjects you are interested in to see if we have a course for you.
+                    Please search below for any subjects you are interested in, to see if we have a course for you.
                 </p>
                 <input
                     type="text"

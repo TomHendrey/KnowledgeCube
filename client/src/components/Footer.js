@@ -12,7 +12,7 @@ const Footer = () => {
                 </div>
 
                 <div className={styles.links}>
-                    <div className={styles.footerEmail}>contact: info@knowledgecube.org</div>
+                    <div className={styles.footerEmail}>info@knowledgecube.org</div>
                 </div>
             </div>
         </footer>

@@ -3,11 +3,14 @@ import axiosInstance from '../axiosConfig.js';
 import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
 import { ReactComponent as Cube } from '../assets/images/cube-01.svg';
+import { useContext } from 'react';
+import { UserContext } from '../UserContext';
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
     const { email, password } = formData;
     const navigate = useNavigate();
+    const { handleLogin } = useContext(UserContext); // Use handleLogin from context
 
     // Update form data on user input
     const handleChange = (e) => {
@@ -24,6 +27,9 @@ const Login = () => {
             // Save user token and info in localStorage
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
+
+            // Update the role in the context
+            handleLogin(user);
 
             // Redirect user based on their role
             if (user.role === 'learner') {

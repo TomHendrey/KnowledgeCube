@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import Logo from './Logo';
 
 const NavbarLearner = ({ onLogout }) => {
-    const navigate = useNavigate(); // Declare useNavigate here
+    const [menuOpen, setMenuOpen] = useState(false);
+    const navigate = useNavigate();
 
     const handleLogout = () => {
-        onLogout(); // Call onLogout function to clear localStorage
-        navigate('/login'); // Redirect to login page
+        onLogout();
+        navigate('/login');
+    };
+
+    const toggleMenu = () => {
+        setMenuOpen((prev) => !prev);
     };
 
     return (
@@ -17,7 +22,12 @@ const NavbarLearner = ({ onLogout }) => {
                 <div className={styles.logo}>
                     <Logo />
                 </div>
-                <ul className={styles.navList}>
+                <div className={styles.hamburgerIcon} onClick={toggleMenu}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <ul className={`${styles.navList} ${menuOpen ? styles.active : ''}`}>
                     <li>
                         <Link to="/learner-dashboard" className={styles.navLinks}>
                             Your Courses
@@ -29,7 +39,7 @@ const NavbarLearner = ({ onLogout }) => {
                         </Link>
                     </li>
                     <li>
-                        <button onClick={handleLogout} className={styles.navLinks}>
+                        <button onClick={handleLogout} className={styles.logoutButton}>
                             Logout
                         </button>
                     </li>
