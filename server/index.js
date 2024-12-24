@@ -51,10 +51,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Serve static files from the uploads directory
-app.use('/uploads/images', express.static(path.join(__dirname, 'uploads/images')));
+app.use('/uploads/images', express.static(path.join(__dirname, '/uploads/images')));
 
 // Serve static files from the uploads/pdfs directory
-app.use('/uploads/pdfs', express.static(path.join(__dirname, 'uploads/pdfs')));
+app.use('/uploads/pdfs', express.static(path.join(__dirname, '/uploads/pdfs')));
+
+// Serve static files from the uploads/videos directory
+app.use('/uploads/videos', express.static('/uploads/videos'));
 
 app.use(express.json()); // Parse incoming JSON requests
 
