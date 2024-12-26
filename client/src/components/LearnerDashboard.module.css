@@ -182,6 +182,54 @@
     box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
+.explore-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+}
+
+.explore-card {
+    position: relative;
+    background-image: url('../assets/images/white_card.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #333;
+    border-radius: 8px;
+    border: 4px dashed #3e3e3e;
+    width: 320px; /* Match the width */
+    height: 520px; /* Match the height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin: 0 auto; /* Center the card */
+}
+
+.explore-card:hover {
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-7px);
+    background-color: #f9f9f9;
+}
+
+.explore-card-title {
+    font-size: 1.8rem; /* Same font size as the creator card */
+    font-weight: bold;
+    line-height: 1.2;
+    z-index: 1;
+}
+
+.explore-card-icon {
+    font-size: 2rem;
+    margin-top: 10px;
+    z-index: 1;
+}
+
 @media (max-width: 768px) {
     .course-list {
         grid-template-columns: 1fr;
