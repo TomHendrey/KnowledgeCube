@@ -121,7 +121,7 @@
 /* Responsive Navbar */
 @media (max-width: 768px) {
     .navList {
-        display: none; /* Hide the navigation links by default */
+        display: none;
         flex-direction: column;
         gap: 10px;
         background-color: #333;
@@ -134,11 +134,11 @@
     }
 
     .navList.active {
-        display: flex; /* Show the navigation links when active */
+        display: flex;
     }
 
     .hamburgerIcon {
-        display: block; /* Display the hamburger menu icon */
+        display: block;
         cursor: pointer;
         color: #fff;
         font-size: 24px;

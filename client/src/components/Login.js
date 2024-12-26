@@ -72,7 +72,7 @@ const Login = () => {
                             required
                         />
                     </div>
-                    <button type="submit" className={styles.blackButton}>
+                    <button type="submit" className={styles.greenButton}>
                         Login
                     </button>
                     <p>

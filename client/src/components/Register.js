@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axiosInstance from '../axiosConfig.js';
 import { useNavigate } from 'react-router-dom';
 import styles from './Register.module.css';
-import { ReactComponent as Cube } from '../assets/images/cube-01.svg';
+import { ReactComponent as Cube } from '../assets/images/cubeC-01-03.svg';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -76,12 +76,12 @@ const Register = () => {
 
     return (
         <div>
-            <h2 className={styles['page-header']}>Welcome To KnowledgeCube!</h2>
+            <h2 className={styles['page-header']}>Welcome To KnowledgeCube</h2>
             <p className={styles.subHeader}>
                 Whether you're here to learn or teach, KnowledgeCube is your platform for growth and collaboration. Get
                 started now!
             </p>
-            <Cube className={styles.cubeIcon} /> {/* Render the cube icon */}
+            <Cube className={styles.cubeIcon} />
             <div className={styles['center-wrapper']}>
                 <form onSubmit={handleSubmit} className={styles['form-container']}>
                     {/* Name Field */}
@@ -119,7 +119,7 @@ const Register = () => {
                     </div>
 
                     {/* Submit Button */}
-                    <button type="submit" className={styles['blackButton']}>
+                    <button type="submit" className={styles['greenButton']}>
                         Register
                     </button>
                     <p>

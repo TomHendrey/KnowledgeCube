@@ -64,17 +64,20 @@ textarea::placeholder {
 input {
     width: 100%;
     padding: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     border: solid;
     border-width: 1px;
     border-color: #c9c9c9;
     border-bottom: 2px solid #adadad;
-    font-size: 18px;
+    font-size: 14px;
     font-family: 'Open Sans', sans-serif;
     box-sizing: border-box;
     outline: none;
     padding: 5px;
-    margin-top: 0px;
+    margin-left: 0px;
+}
+.moduleInput {
+    margin-bottom: 20px;
 }
 
 .textArea {
@@ -97,7 +100,8 @@ input {
 
 input:focus,
 textarea:focus {
-    border-bottom: 2px solid #37393a;
+    border: 1px solid #5e9be6;
+    border-bottom: 2px solid #5e9be6;
     box-shadow: none;
 }
 

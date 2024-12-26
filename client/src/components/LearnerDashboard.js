@@ -68,10 +68,21 @@ const LearnerDashboard = () => {
                 {!loading && !error && (
                     <div className={styles['course-list']}>
                         {enrolledCourses.length === 0 ? (
-                            <div className={styles['explore-container']}>
-                                <div className={styles['explore-card']} onClick={() => navigate('/course-discovery')}>
-                                    <h3 className={styles['explore-card-title']}>Explore Courses</h3>
-                                    <div className={styles['explore-card-icon']}>🔍</div>
+                            <div className={styles['no-courses-container']}>
+                                <h2 className={styles['no-courses-header']}>Discover New Learning Paths</h2>
+                                <div className={styles['no-courses-content']}>
+                                    <div
+                                        className={styles['explore-card']}
+                                        onClick={() => navigate('/course-discovery')}
+                                    >
+                                        <h3 className={styles['explore-card-title1']}>Explore New</h3>
+                                        <h3 className={styles['explore-card-title2']}>Courses</h3>
+                                        <div className={styles['explore-card-icon']}>🔍</div>
+                                    </div>
+                                    <p className={styles['explore-text']}>
+                                        Begin your journey today and start exploring courses designed to broaden your
+                                        knowledge and skills.
+                                    </p>
                                 </div>
                             </div>
                         ) : (

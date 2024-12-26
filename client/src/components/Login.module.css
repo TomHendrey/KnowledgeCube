@@ -39,7 +39,7 @@
     text-align: center;
     color: #232526;
     margin-top: 50px;
-    margin-bottom: 20px; /* Added spacing below the header */
+    margin-bottom: 20px;
 }
 
 .page-header::after {
@@ -52,19 +52,19 @@
 }
 
 .cubeIcon {
-    max-width: 130px;
+    max-width: 100px;
     margin: 0 auto 20px;
     display: block;
+    margin-top: 30px;
 }
 
 .form-container {
-    background-color: #ffffff; /* Pure white for contrast */
-    border-radius: 8px; /* Rounded corners for a modern look */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    padding: 25px; /* Add spacing inside the container */
-    max-width: 400px; /* Set a fixed width for the form */
-    width: 100%; /* Allow responsiveness */
-    margin: 10px auto; /* Center it horizontally with space above */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    max-width: 400px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -75,20 +75,20 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-bottom: 10px; /* Add space between input fields */
+    margin-bottom: 10px;
 }
 
 input {
     padding: 8px;
     font-size: 14px;
     width: 100%;
-    border: 1px solid #ccc; /* Subtle border */
-    border-radius: 4px; /* Rounded corners for inputs */
+    border: 1px solid #ccc;
+    border-radius: 4px;
     box-sizing: border-box;
 }
 
 .error-message {
-    color: #556781; /* Soft grey/blue for contrast */
+    color: #556781;
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     text-align: center;
@@ -114,6 +114,41 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* Green button styles */
+.greenButton {
+    font-family: 'Open Sans', sans-serif; /* Default font for body text */
+    background-image: linear-gradient(to right, #486c61 0%, #207554 51%, #293632 100%);
+    margin: 16px auto 0;
+    padding: 18px 12px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all 0.4s ease-in-out;
+    background-size: 300% auto;
+    color: white;
+    box-shadow: 0 0 12px #eee;
+    border-radius: 8px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100%;
+}
+
+.greenButton:hover {
+    background-image: linear-gradient(to right, #4daa88 0%, #0c773c 51%, #189e66 100%);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.greenButton:active {
+    background-image: linear-gradient(to right, #305841 0%, #155637 51%, #1a4231 100%);
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2);
+    transform: scale(0.99);
+    outline-offset: 4px;
+    transition: all 0.1s ease-in-out;
 }
 
 .blackButton:hover {

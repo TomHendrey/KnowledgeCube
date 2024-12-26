@@ -13,12 +13,40 @@
     text-align: center;
 }
 
+.no-courses-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.no-courses-header {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    color: #232526;
+    text-align: center;
+}
+
+.no-courses-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    text-align: center;
+}
+
 .page-header {
     font-size: 36px;
     font-weight: 700;
     color: #232526;
     margin-bottom: 30px;
     margin-top: 50px;
+
     text-align: center;
 }
 
@@ -30,6 +58,17 @@
     background-color: #adadad;
     margin: 8px auto 0;
     margin-bottom: 20px;
+}
+
+.page-description {
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    color: #666;
+    margin: 0 auto;
+    padding: 0 10px;
+    max-width: 600px;
+    margin-bottom: 0px;
 }
 
 .error {
@@ -47,159 +86,26 @@
     margin-bottom: 100px;
 }
 
-.course-card {
-    width: 100%;
-    max-width: 320px;
-    min-width: 280px;
-    height: 520px;
-    padding: 20px 16px;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: all 0.3s ease;
-    margin: 0 auto;
-    cursor: pointer;
-}
-
-.course-card:hover {
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
-    transform: translateY(-7px);
-    background-color: #f9f9f9;
-}
-
-.course-image {
-    width: 100%;
-    height: 250px;
-    border-radius: 8px;
-    object-fit: cover;
-    margin-bottom: 15px;
-    object-position: top;
-}
-
-.completed-badge {
-    color: rgb(39, 147, 91);
-    font-size: 20px;
-    font-weight: bold;
-    font-family: 'Playfair Display', sans-serif;
-}
-
-.course-title {
-    font-size: 22px;
-    font-weight: bold;
-    margin: 10px 0;
-    color: #333;
-    max-height: 50px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.page-description {
-    font-size: 14px;
-    color: #666;
-    margin: 0 0 10px;
-    padding: 0 10px;
-    max-height: 80px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.course-description {
-    font-size: 14px;
-    color: #666;
-    margin: 0 0 10px;
-    padding: 0 10px;
-    max-height: 80px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    align-items: center;
-    text-align: center;
-}
-
-.progress-container {
-    text-align: left;
-    margin-top: 0px;
-    display: flex;
-    flex-direction: column;
-}
-
-.progress-label {
-    font-family: 'Playfair Display', sans-serif;
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 5px;
-}
-
-.progress-bar {
-    background-color: #e0e0e0;
-    border-radius: 8px;
-    overflow: hidden;
-    height: 5px;
-    position: relative;
-}
-
-.progress {
-    background-color: #d3b2b2;
-    height: 100%;
-    transition: width 0.4s ease;
-}
-
-.course-action {
-    background-image: linear-gradient(to right, #232526 0%, #414345 51%, #232526 100%);
-    margin: 12px auto 0;
-    padding: 16px 12px;
-    text-align: center;
-    text-transform: uppercase;
-    transition: all 0.4s ease-in-out;
-    background-size: 300% auto;
-    color: white;
-    box-shadow: 0 0 12px #eee;
-    border-radius: 8px;
-    font-size: 14px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-}
-
-.course-action:hover {
-    background-position: right center;
-    color: #fff;
-}
-
-.course-action:active {
-    background-image: linear-gradient(to right, #555555 0%, #666666 51%, #555555 100%);
-    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2);
-}
-
 .explore-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 50px auto;
+    gap: 30px;
+    flex-wrap: wrap;
 }
 
 .explore-card {
     position: relative;
-    background-image: url('../assets/images/white_card.jpg');
+    background-image: url('../assets/images/map7.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     color: #333;
     border-radius: 8px;
-    border: 4px dashed #3e3e3e;
-    width: 320px; /* Match the width */
-    height: 520px; /* Match the height */
+    border: 2px dashed #858585;
+    width: 320px;
+    height: 480px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -208,7 +114,6 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     cursor: pointer;
-    margin: 0 auto; /* Center the card */
 }
 
 .explore-card:hover {
@@ -217,17 +122,38 @@
     background-color: #f9f9f9;
 }
 
-.explore-card-title {
-    font-size: 1.8rem; /* Same font size as the creator card */
+.explore-card-title1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
     font-weight: bold;
-    line-height: 1.2;
+    line-height: 0.1;
     z-index: 1;
 }
 
-.explore-card-icon {
-    font-size: 2rem;
-    margin-top: 10px;
+.explore-card-title2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: bold;
+    line-height: 1.2;
     z-index: 1;
+    margin-bottom: 250px;
+}
+
+.explore-text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    color: #555;
+    text-align: center;
+    max-width: 600px;
+    line-height: 1.5;
+    padding: 20px;
+}
+
+.explore-card-icon {
+    font-size: 4rem;
+    margin-top: 60px;
+    margin-bottom: 100px;
+    display: none;
 }
 
 @media (max-width: 768px) {
@@ -235,16 +161,25 @@
         grid-template-columns: 1fr;
         gap: 20px;
     }
-
-    .course-card {
-        max-width: 320px;
-        margin: 0 auto;
+    .explore-card {
+        width: 280px;
+        height: 450px;
+    }
+    .explore-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .explore-text {
+        text-align: center;
     }
 }
 
 @media (max-width: 480px) {
-    .course-card {
-        max-width: 320px;
-        margin: 0 auto;
+    .explore-card {
+        width: 240px;
+        height: 400px;
+    }
+    .explore-container {
+        gap: 20px;
     }
 }

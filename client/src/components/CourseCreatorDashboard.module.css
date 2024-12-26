@@ -46,7 +46,7 @@ small {
     height: 1px;
     background-color: #adadad;
     margin: 8px auto 0;
-    margin-bottom: 0px;
+    margin-bottom: 30px;
 }
 
 .page-description {
@@ -176,7 +176,7 @@ small {
 
 .create-card {
     position: relative;
-    background-image: url('http://localhost:5001/uploads/images/create-course-bg.jpg');
+    background-image: url('../assets/images/white_card_discover.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

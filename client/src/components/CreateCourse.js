@@ -139,7 +139,8 @@ const CreateCourse = () => {
         <div className={styles.container}>
             <h1 className={styles['page-header']}>Create a New Course</h1>
             <p className={styles['page-description']}>
-                Here you can use our course builder to create a course from scratch.
+                Here you can use our course builder to create a course from scratch. Please complete at least one
+                mudule.
             </p>
 
             <form onSubmit={handleSubmit} className={styles.createCourseForm}>
@@ -182,6 +183,7 @@ const CreateCourse = () => {
                             <h3>Module Title</h3>
                         </div>
                         <input
+                            className={styles.moduleInput}
                             type="text"
                             placeholder="Enter module title here..."
                             value={module.moduleTitle}
