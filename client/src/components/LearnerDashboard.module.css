@@ -46,7 +46,6 @@
     color: #232526;
     margin-bottom: 30px;
     margin-top: 50px;
-
     text-align: center;
 }
 
@@ -68,7 +67,7 @@
     margin: 0 auto;
     padding: 0 10px;
     max-width: 600px;
-    margin-bottom: 0px;
+    margin-bottom: 30px;
 }
 
 .error {
@@ -84,6 +83,141 @@
     justify-content: center;
     padding: 20px;
     margin-bottom: 100px;
+}
+
+.course-card {
+    /* Added from file1.css */
+    width: 100%;
+    max-width: 320px;
+    min-width: 280px;
+    height: 520px;
+    padding: 20px 16px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.course-card:hover {
+    /* Added from file1.css */
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-7px);
+    background-color: #f9f9f9;
+}
+
+.course-image {
+    /* Added from file1.css */
+    width: 100%;
+    height: 250px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    object-position: top;
+}
+
+.completed-badge {
+    /* Added from file1.css */
+    color: rgb(39, 147, 91);
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Playfair Display', sans-serif;
+}
+
+.course-title {
+    /* Added from file1.css */
+    font-size: 22px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #333;
+    max-height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.course-description {
+    /* Added from file1.css */
+    font-size: 14px;
+    color: #666;
+    margin: 0 0 10px;
+    padding: 0 10px;
+    max-height: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    align-items: center;
+    text-align: center;
+}
+
+.progress-container {
+    /* Added from file1.css */
+    text-align: left;
+    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.progress-label {
+    /* Added from file1.css */
+    font-family: 'Playfair Display', sans-serif;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.progress-bar {
+    /* Added from file1.css */
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 5px;
+    position: relative;
+}
+
+.progress {
+    /* Added from file1.css */
+    background-color: #d3b2b2;
+    height: 100%;
+    transition: width 0.4s ease;
+}
+
+.course-action {
+    /* Added from file1.css */
+    background-image: linear-gradient(to right, #232526 0%, #414345 51%, #232526 100%);
+    margin: 12px auto 0;
+    padding: 16px 12px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all 0.4s ease-in-out;
+    background-size: 300% auto;
+    color: white;
+    box-shadow: 0 0 12px #eee;
+    border-radius: 8px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.course-action:hover {
+    /* Added from file1.css */
+    background-position: right center;
+    color: #fff;
+}
+
+.course-action:active {
+    /* Added from file1.css */
+    background-image: linear-gradient(to right, #555555 0%, #666666 51%, #555555 100%);
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
 .explore-container {
@@ -108,78 +242,4 @@
     height: 480px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.explore-card:hover {
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
-    transform: translateY(-7px);
-    background-color: #f9f9f9;
-}
-
-.explore-card-title1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 38px;
-    font-weight: bold;
-    line-height: 0.1;
-    z-index: 1;
-}
-
-.explore-card-title2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 38px;
-    font-weight: bold;
-    line-height: 1.2;
-    z-index: 1;
-    margin-bottom: 250px;
-}
-
-.explore-text {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 18px;
-    color: #555;
-    text-align: center;
-    max-width: 600px;
-    line-height: 1.5;
-    padding: 20px;
-}
-
-.explore-card-icon {
-    font-size: 4rem;
-    margin-top: 60px;
-    margin-bottom: 100px;
-    display: none;
-}
-
-@media (max-width: 768px) {
-    .course-list {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    .explore-card {
-        width: 280px;
-        height: 450px;
-    }
-    .explore-container {
-        flex-direction: column;
-        text-align: center;
-    }
-    .explore-text {
-        text-align: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .explore-card {
-        width: 240px;
-        height: 400px;
-    }
-    .explore-container {
-        gap: 20px;
-    }
 }
