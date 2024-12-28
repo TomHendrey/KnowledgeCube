@@ -71,7 +71,7 @@
 }
 
 .error {
-    color: #007bff;
+    color: #4c89c9;
     font-size: 18px;
     font-weight: 600;
     text-align: center;
@@ -233,118 +233,78 @@
 
 .explore-card {
     position: relative;
-
     background-image: url('../assets/images/map7.jpg');
-
     background-size: cover;
-
     background-position: center;
-
     background-repeat: no-repeat;
-
     color: #333;
-
     border-radius: 8px;
-
     border: 2px dashed #858585;
-
     width: 320px;
-
     height: 480px;
-
     display: flex;
-
     flex-direction: column;
-
     justify-content: center;
-
     align-items: center;
-
     text-align: center;
-
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
     transition: all 0.3s ease;
-
     cursor: pointer;
 }
 
 .explore-card:hover {
     box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
-
     transform: translateY(-7px);
-
     background-color: #f9f9f9;
 }
 
 .explore-card-title1 {
     font-family: 'Playfair Display', serif;
-
     font-size: 38px;
-
     font-weight: bold;
-
     line-height: 0.1;
-
     z-index: 1;
 }
 
 .explore-card-title2 {
     font-family: 'Playfair Display', serif;
-
     font-size: 38px;
-
     font-weight: bold;
-
     line-height: 1.2;
-
     z-index: 1;
-
     margin-bottom: 250px;
 }
 
 .explore-text {
     font-family: 'Open Sans', sans-serif;
-
     font-size: 18px;
-
     color: #555;
-
     text-align: center;
-
     max-width: 600px;
-
     line-height: 1.5;
-
     padding: 20px;
 }
 
 .explore-card-icon {
     font-size: 4rem;
-
     margin-top: 60px;
-
     margin-bottom: 100px;
-
     display: none;
 }
 
 @media (max-width: 768px) {
     .course-list {
         grid-template-columns: 1fr;
-
         gap: 20px;
     }
 
     .explore-card {
         width: 280px;
-
         height: 450px;
     }
 
     .explore-container {
         flex-direction: column;
-
         text-align: center;
     }
 
@@ -356,7 +316,6 @@
 @media (max-width: 480px) {
     .explore-card {
         width: 240px;
-
         height: 400px;
     }
 

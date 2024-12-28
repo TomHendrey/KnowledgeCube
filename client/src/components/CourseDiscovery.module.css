@@ -164,9 +164,8 @@ body {
     background-image: linear-gradient(to right, #555555 0%, #666666 51%, #555555 100%);
 }
 
-/* Error message styling */
 .error {
-    color: rgb(134, 134, 134);
+    color: #4c89c9;
     font-size: 18px;
     font-weight: 600;
     text-align: center;

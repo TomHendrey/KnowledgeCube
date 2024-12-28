@@ -131,14 +131,20 @@ body {
     object-fit: cover;
     object-position: top;
     border-radius: 6px;
-    margin-bottom: 0rem;
+    margin-bottom: 0.5rem; /* Reduce space below the image */
 }
 
 .lessonTitle {
     font-size: 1rem;
     font-weight: 600;
     color: #333;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem; /* Keeps some spacing below the title */
+    margin-top: 0.5rem; /* Reduces gap between image and title */
+    line-height: 1.2;
+    max-height: 2.4em; /* Keeps the height consistent for two lines */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
 }
 
 .lessonDescription {
@@ -150,7 +156,7 @@ body {
 
 .viewLessonButton {
     font-family: 'Open Sans', sans-serif;
-    margin: 10px auto 0;
+    margin-top: auto;
     padding: 8px 20px;
     font-size: 0.7rem;
     text-transform: uppercase;
@@ -221,6 +227,14 @@ body {
     height: 100%;
     background-color: #488a6a;
     transition: width 0.5s ease-in-out;
+}
+
+.error {
+    color: #4c89c9;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 20px;
 }
 
 @media (max-width: 768px) {
