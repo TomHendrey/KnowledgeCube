@@ -58,7 +58,9 @@ const CourseDiscovery = () => {
         }
     };
 
-    const filteredCourses = courses.filter((course) => course.title.toLowerCase().includes(searchQuery.toLowerCase()));
+    const filteredCourses = courses
+        .filter((course) => !course.isDraft)
+        .filter((course) => course.title.toLowerCase().includes(searchQuery.toLowerCase()));
 
     return (
         <div className={styles.container}>

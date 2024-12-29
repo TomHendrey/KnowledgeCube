@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axiosInstance from '../axiosConfig.js';
 import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
-import { ReactComponent as Cube } from '../assets/images/cube-01.svg';
+import { ReactComponent as Cube } from '../assets/images/whitecube01.svg';
 import { useContext } from 'react';
 import { UserContext } from '../UserContext';
 

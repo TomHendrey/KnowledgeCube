@@ -263,6 +263,118 @@ router.get('/draft/:id', verifyToken, checkRole('creator'), async (req, res) => 
     }
 });
 
+// PUT /courses/draft/:id - Update a draft course
+router.put(
+    '/draft/:id',
+    verifyToken,
+    checkRole('creator'),
+    uploadFile.fields([
+        { name: 'image', maxCount: 1 },
+        { name: 'pdfs', maxCount: 10 },
+        { name: 'lessonImages', maxCount: 20 },
+        { name: 'videos', maxCount: 5 },
+    ]),
+    async (req, res) => {
+        const { id } = req.params;
+
+        try {
+            // Validate course ID
+            if (!mongoose.Types.ObjectId.isValid(id)) {
+                return res.status(400).json({ message: 'Invalid course ID.' });
+            }
+
+            // Parse body data
+            const { title, description, modules, links } = req.body;
+
+            // Parse modules and links if they exist
+            const parsedModules = modules ? JSON.parse(modules) : [];
+            const parsedLinks = links ? JSON.parse(links) : [];
+
+            // Handle uploaded files
+            const courseImage = req.files?.image ? `/uploads/images/${req.files.image[0].filename}` : null;
+            const pdfFiles = req.files?.pdfs ? req.files.pdfs.map((file) => `/uploads/pdfs/${file.filename}`) : [];
+            const videoFiles = req.files?.videos
+                ? req.files.videos.map((file) => `/uploads/videos/${file.filename}`)
+                : [];
+            const lessonImages = req.files?.lessonImages
+                ? req.files.lessonImages.map((file) => `/uploads/images/${file.filename}`)
+                : [];
+
+            // Attach lesson images and PDFs to lessons (if provided)
+            let imageIndex = 0;
+            let pdfIndex = 0;
+
+            parsedModules.forEach((module) => {
+                module.lessons = module.lessons || []; // Ensure lessons is always an array
+                module.lessons.forEach((lesson) => {
+                    lesson.images = lesson.images || [];
+                    if (req.files['lessonImages'] && req.files['lessonImages'][imageIndex]) {
+                        lesson.images.push(`/uploads/images/${req.files['lessonImages'][imageIndex].filename}`);
+                        imageIndex++;
+                    }
+
+                    if (req.files['pdfs'] && req.files['pdfs'][pdfIndex]) {
+                        lesson.pdf = `/uploads/pdfs/${req.files['pdfs'][pdfIndex].filename}`;
+                        pdfIndex++;
+                    }
+                });
+            });
+
+            // Update the draft course
+            const updatedCourse = await Course.findOneAndUpdate(
+                { _id: id, creator: req.userId, isDraft: true },
+                {
+                    title,
+                    description,
+                    modules: parsedModules,
+                    links: parsedLinks,
+                    image: courseImage,
+                    pdfs: pdfFiles,
+                    videos: videoFiles,
+                },
+                { new: true } // Return the updated document
+            );
+
+            if (!updatedCourse) {
+                return res.status(404).json({ message: 'Draft not found or unauthorized access.' });
+            }
+
+            res.status(200).json({ message: 'Draft updated successfully.', draft: updatedCourse });
+        } catch (err) {
+            console.error('Error updating draft course:', err.message);
+            res.status(500).json({
+                message: 'An error occurred while updating the draft.',
+                error: err.message,
+            });
+        }
+    }
+);
+
+// DELETE /courses/:id - Delete a course
+router.delete('/:id', verifyToken, checkRole('creator'), async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        // Validate the course ID
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ message: 'Invalid course ID.' });
+        }
+
+        // Find and delete the course
+        const deletedCourse = await Course.findOneAndDelete({ _id: id, creator: req.userId });
+
+        // Check if the course exists
+        if (!deletedCourse) {
+            return res.status(404).json({ message: 'Course not found or unauthorized action.' });
+        }
+
+        res.status(200).json({ message: 'Course deleted successfully.' });
+    } catch (err) {
+        console.error('Error deleting course:', err.message);
+        res.status(500).json({ message: 'An error occurred while deleting the course.' });
+    }
+});
+
 // Get courses the learner is enrolled in
 router.get('/enrolled', verifyToken, checkRole('learner'), async (req, res) => {
     try {

@@ -64,51 +64,36 @@ const CreateCourse = () => {
     };
 
     // Handle form submission
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async (isDraft) => {
+        // Prevent default form submission
+        if (isDraft === undefined) return; // Safety check for undefined values
 
-        if (modules.length === 0) {
+        if (!isDraft && modules.length === 0) {
             setMessage('You must add at least one module.');
             return;
         }
 
         const formData = new FormData();
-
         formData.append('title', title);
-        formData.append('description', description);
+        formData.append('description', description || ''); // Allow empty description for drafts
+        formData.append('isDraft', isDraft); // Include the draft flag
 
         if (courseImage) formData.append('image', courseImage);
-
         pdfs.forEach((pdf) => formData.append('pdfs', pdf));
 
         modules.forEach((module, moduleIndex) => {
-            formData.append(`modules[${moduleIndex}][moduleTitle]`, module.moduleTitle); // Add title
-            formData.append(`modules[${moduleIndex}][moduleDescription]`, module.moduleDescription); // Add description
+            formData.append(`modules[${moduleIndex}][moduleTitle]`, module.moduleTitle);
+            formData.append(`modules[${moduleIndex}][moduleDescription]`, module.moduleDescription);
 
             module.lessons.forEach((lesson, lessonIndex) => {
-                // Append lesson content
                 formData.append(`modules[${moduleIndex}][lessons][${lessonIndex}][lessonTitle]`, lesson.lessonTitle);
-
-                // Append lesson description
                 formData.append(
-                    `modules[${moduleIndex}][lessons][${lessonIndex}][lessonDescription]`,
-                    lesson.lessonDescription
-                ); // Add description
-
-                // Append lesson content
-                if (lesson.lessonContent) {
-                    formData.append(
-                        `modules[${moduleIndex}][lessons][${lessonIndex}][lessonContent]`,
-                        lesson.lessonContent
-                    );
-                }
-
-                // Attach lesson image
+                    `modules[${moduleIndex}][lessons][${lessonIndex}][lessonContent]`,
+                    lesson.lessonContent || ''
+                );
                 if (lesson.lessonImage) {
                     formData.append('lessonImages', lesson.lessonImage);
                 }
-
-                // Attach lesson PDF
                 if (lesson.lessonPDF) {
                     formData.append('pdfs', lesson.lessonPDF);
                 }
@@ -116,23 +101,50 @@ const CreateCourse = () => {
         });
 
         try {
+            const endpoint = isDraft ? '/courses/draft' : '/courses/create'; // Determine endpoint
             const token = localStorage.getItem('token');
-            const response = await axiosInstance.post('/courses/create', formData, {
+
+            const response = await axiosInstance.post(endpoint, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${token}`,
                 },
             });
+
             setMessage(response.data.message);
-            setTitle('');
-            setDescription('');
-            setModules([]);
-            setCourseImage(null);
-            setPdfs([]);
-            navigate('/creator-dashboard');
+
+            // Reset form fields after publishing (not for drafts)
+            if (!isDraft) {
+                setTitle('');
+                setDescription('');
+                setModules([]);
+                setCourseImage(null);
+                setPdfs([]);
+                navigate('/creator-dashboard'); // Redirect after publishing
+            }
         } catch (err) {
-            setMessage(err.response?.data?.message || 'Error creating course');
+            setMessage(err.response?.data?.message || 'Error saving course.');
         }
+    };
+
+    // Validation function to check if the course can be published
+    const canPublish = () => {
+        // Ensure title and description are filled
+        if (!title || !description) return false;
+
+        // Ensure at least one module exists
+        if (modules.length === 0) return false;
+
+        // Validate each module and its lessons
+        for (const module of modules) {
+            if (!module.moduleTitle || !module.moduleDescription) return false;
+            for (const lesson of module.lessons) {
+                if (!lesson.lessonTitle) return false;
+            }
+        }
+
+        // All validations passed
+        return true;
     };
 
     return (
@@ -140,7 +152,7 @@ const CreateCourse = () => {
             <h1 className={styles['page-header']}>Create a New Course</h1>
             <p className={styles['page-description']}>
                 Here you can use our course builder to create a course from scratch. Please complete at least one
-                mudule.
+                module.
             </p>
 
             <form onSubmit={handleSubmit} className={styles.createCourseForm}>
@@ -176,7 +188,7 @@ const CreateCourse = () => {
 
                 {/* Modules and Lessons */}
                 <h3>Content</h3>
-                <p>All courses must have at leat one module, please number them in sequence.</p>
+                <p>All courses must have at leat one module</p>
                 {modules.map((module, moduleIndex) => (
                     <div key={moduleIndex} className={styles.module}>
                         <div className={styles.moduleHeader}>
@@ -283,7 +295,24 @@ const CreateCourse = () => {
                     Add Module
                 </button>
                 <div></div>
-                <button type="submit" className={`${styles.addButton} ${styles.submitButton}`}>
+                <button
+                    type="button"
+                    onClick={() => handleSubmit(true)}
+                    className={`${styles.addButton} ${styles.draftButton}`}
+                >
+                    Save as Draft
+                </button>
+                <div></div>
+                <p className={styles.publishDescription}>
+                    Before publishing a course you must include a 'Course Title' and a 'Course Description', as well as
+                    at least one Module also with a 'Title' and a 'Descripion'.
+                </p>
+                <button
+                    type="button"
+                    onClick={() => handleSubmit(false)}
+                    className={`${styles.addButton} ${styles.submitButton}`}
+                    disabled={!canPublish()}
+                >
                     Publish Course
                 </button>
             </form>

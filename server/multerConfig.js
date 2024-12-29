@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
         // Ensure the directory exists (redundant, but a safety net)
         fs.mkdir(uploadDir, { recursive: true }, (err) => {
             if (err) {
-                return cb(err);
+                return cb(err); // Handle error if directory creation fails
             }
             cb(null, uploadDir);
         });

@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import axiosInstance from '../axiosConfig.js';
 import { useNavigate } from 'react-router-dom';
 import styles from './Register.module.css';
-import { ReactComponent as Cube } from '../assets/images/cubeC-01-03.svg';
-
+import { ReactComponent as Cube } from '../assets/images/whitecube01.svg';
 const Register = () => {
     const navigate = useNavigate();
     const [error, setError] = useState(null); // Global error for form submission
