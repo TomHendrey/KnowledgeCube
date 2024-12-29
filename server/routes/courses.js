@@ -171,7 +171,11 @@ router.post(
         { name: 'lessonImages', maxCount: 20 }, // Lesson images
         { name: 'videos', maxCount: 5 }, // Course or lesson videos
     ]),
+
     async (req, res) => {
+        console.log('Body:', req.body); // Logs text fields
+        console.log('Files:', req.files); // Logs uploaded files
+
         const { title, description, modules, links } = req.body;
 
         try {
