@@ -2,8 +2,14 @@ import mongoose from 'mongoose';
 
 const CourseSchema = new mongoose.Schema(
     {
+        isDraft: { type: Boolean, default: false },
         title: { type: String, required: true },
-        description: { type: String, required: true },
+        description: {
+            type: String,
+            required: function () {
+                return !this.isDraft;
+            },
+        },
         creator: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',

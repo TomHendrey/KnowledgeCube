@@ -105,17 +105,16 @@ router.post(
             const parsedLinks = links ? JSON.parse(links) : [];
 
             // Attach lesson images to their corresponding lessons
-            let imageIndex = 0; // Track the uploaded lesson images
+            let imageIndex = 0;
 
             // Attach lesson images to their corresponding lessons
-            let pdfIndex = 0; // Track uploaded PDFs
+            let pdfIndex = 0;
 
             console.log('Request Body Keys:', Object.keys(req.body));
 
             parsedModules.forEach((module, moduleIndex) => {
                 module.lessons.forEach((lesson, lessonIndex) => {
                     // Ensure lessonContent persists from req.body
-                    // Ensure lessonContent persists
                     lesson.lessonContent = lesson.lessonContent || '';
 
                     // Ensure that the lesson images array is initialized before you attemp to push to it
@@ -160,6 +159,109 @@ router.post(
         }
     }
 );
+
+// POST /courses/draft - Save a draft course
+router.post(
+    '/draft',
+    verifyToken,
+    checkRole('creator'),
+    uploadFile.fields([
+        { name: 'image', maxCount: 1 }, // Single course image
+        { name: 'pdfs', maxCount: 10 }, // Multiple PDFs
+        { name: 'lessonImages', maxCount: 20 }, // Lesson images
+        { name: 'videos', maxCount: 5 }, // Course or lesson videos
+    ]),
+    async (req, res) => {
+        const { title, description, modules, links } = req.body;
+
+        try {
+            // Parse and process modules and links
+            const parsedModules = modules ? JSON.parse(modules) : [];
+            const parsedLinks = links ? JSON.parse(links) : [];
+
+            // Handle uploaded files
+            const courseImage = req.files?.image ? `/uploads/images/${req.files.image[0].filename}` : null;
+            const pdfFiles = req.files?.pdfs ? req.files.pdfs.map((file) => `/uploads/pdfs/${file.filename}`) : [];
+            const videoFiles = req.files?.videos
+                ? req.files.videos.map((file) => `/uploads/videos/${file.filename}`)
+                : [];
+            const lessonImages = req.files?.lessonImages
+                ? req.files.lessonImages.map((file) => `/uploads/images/${file.filename}`)
+                : [];
+
+            // Attach lesson images and PDFs to lessons (if provided)
+            let imageIndex = 0;
+            let pdfIndex = 0;
+
+            parsedModules.forEach((module) => {
+                module.lessons.forEach((lesson) => {
+                    lesson.images = lesson.images || [];
+                    if (req.files['lessonImages'] && req.files['lessonImages'][imageIndex]) {
+                        lesson.images.push(`/uploads/images/${req.files['lessonImages'][imageIndex].filename}`);
+                        imageIndex++;
+                    }
+
+                    if (req.files['pdfs'] && req.files['pdfs'][pdfIndex]) {
+                        lesson.pdf = `/uploads/pdfs/${req.files['pdfs'][pdfIndex].filename}`;
+                        pdfIndex++;
+                    }
+                });
+            });
+
+            // Create a new course draft
+            const draftCourse = new Course({
+                title, // Optional for drafts
+                description, // Optional for drafts
+                creator: req.userId, // From verifyToken middleware
+                image: courseImage, // Path to cover image
+                modules: parsedModules, // Parsed modules
+                links: parsedLinks, // Parsed links
+                pdfs: pdfFiles, // Uploaded PDFs
+                videos: videoFiles, // Uploaded videos
+                isDraft: true, // Mark as draft
+            });
+
+            // Save draft course
+            const savedDraft = await draftCourse.save();
+
+            res.status(201).json({
+                message: 'Draft course saved successfully.',
+                draft: savedDraft,
+            });
+        } catch (err) {
+            console.error('Error saving draft course:', err.message);
+            res.status(500).json({
+                message: 'An error occurred while saving the draft course.',
+                error: err.message,
+            });
+        }
+    }
+);
+
+// Get /courses/draft/:id - to edit a draft
+router.get('/draft/:id', verifyToken, checkRole('creator'), async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        console.log('Fetching draft:', { id, userId: req.userId }); // Debug log
+
+        // Validate the course ID
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ message: 'Invalid course ID.' });
+        }
+
+        // Fetch the draft course
+        const draft = await Course.findOne({ _id: id, creator: req.userId, isDraft: true });
+        if (!draft) {
+            return res.status(404).json({ message: 'Draft not found.' });
+        }
+
+        res.status(200).json({ draft });
+    } catch (err) {
+        console.error('Error fetching draft:', err.message);
+        res.status(500).json({ message: 'Server error.' });
+    }
+});
 
 // Get courses the learner is enrolled in
 router.get('/enrolled', verifyToken, checkRole('learner'), async (req, res) => {
