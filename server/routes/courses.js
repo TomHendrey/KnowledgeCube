@@ -166,22 +166,34 @@ router.post(
     verifyToken,
     checkRole('creator'),
     uploadFile.fields([
-        { name: 'image', maxCount: 1 }, // Single course image
-        { name: 'pdfs', maxCount: 10 }, // Multiple PDFs
-        { name: 'lessonImages', maxCount: 20 }, // Lesson images
-        { name: 'videos', maxCount: 5 }, // Course or lesson videos
+        { name: 'image', maxCount: 1 },
+        { name: 'pdfs', maxCount: 10 },
+        { name: 'lessonImages', maxCount: 20 },
+        { name: 'videos', maxCount: 5 },
     ]),
-
     async (req, res) => {
-        console.log('Body:', req.body); // Logs text fields
-        console.log('Files:', req.files); // Logs uploaded files
+        console.log('Body:', req.body);
+        console.log('Files:', req.files);
 
         const { title, description, modules, links } = req.body;
 
         try {
-            // Parse and process modules and links
-            const parsedModules = modules ? JSON.parse(modules) : [];
-            const parsedLinks = links ? JSON.parse(links) : [];
+            // Parse modules and links
+            let parsedModules = [];
+            let parsedLinks = [];
+            try {
+                parsedModules = modules ? JSON.parse(modules) : [];
+            } catch (error) {
+                console.error('Error parsing modules:', error.message);
+                return res.status(400).json({ message: 'Invalid modules format.' });
+            }
+
+            try {
+                parsedLinks = links ? JSON.parse(links) : [];
+            } catch (error) {
+                console.error('Error parsing links:', error.message);
+                return res.status(400).json({ message: 'Invalid links format.' });
+            }
 
             // Handle uploaded files
             const courseImage = req.files?.image ? `/uploads/images/${req.files.image[0].filename}` : null;
@@ -198,8 +210,13 @@ router.post(
             let pdfIndex = 0;
 
             parsedModules.forEach((module) => {
+                // Ensure lessons array exists
+                module.lessons = module.lessons || [];
+
                 module.lessons.forEach((lesson) => {
+                    // Ensure lesson.images array exists
                     lesson.images = lesson.images || [];
+
                     if (req.files['lessonImages'] && req.files['lessonImages'][imageIndex]) {
                         lesson.images.push(`/uploads/images/${req.files['lessonImages'][imageIndex].filename}`);
                         imageIndex++;
@@ -214,15 +231,15 @@ router.post(
 
             // Create a new course draft
             const draftCourse = new Course({
-                title, // Optional for drafts
-                description, // Optional for drafts
-                creator: req.userId, // From verifyToken middleware
-                image: courseImage, // Path to cover image
-                modules: parsedModules, // Parsed modules
-                links: parsedLinks, // Parsed links
-                pdfs: pdfFiles, // Uploaded PDFs
-                videos: videoFiles, // Uploaded videos
-                isDraft: true, // Mark as draft
+                title,
+                description,
+                creator: req.userId,
+                image: courseImage,
+                modules: parsedModules,
+                links: parsedLinks,
+                pdfs: pdfFiles,
+                videos: videoFiles,
+                isDraft: true,
             });
 
             // Save draft course
