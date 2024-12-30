@@ -178,22 +178,11 @@ router.post(
         const { title, description, modules, links } = req.body;
 
         try {
-            // Parse modules and links
-            let parsedModules = [];
-            let parsedLinks = [];
-            try {
-                parsedModules = modules ? JSON.parse(modules) : [];
-            } catch (error) {
-                console.error('Error parsing modules:', error.message);
-                return res.status(400).json({ message: 'Invalid modules format.' });
-            }
+            // Only parse if `modules` is a string
+            const parsedModules = Array.isArray(modules) ? modules : JSON.parse(modules || '[]');
+            const parsedLinks = Array.isArray(links) ? links : JSON.parse(links || '[]');
 
-            try {
-                parsedLinks = links ? JSON.parse(links) : [];
-            } catch (error) {
-                console.error('Error parsing links:', error.message);
-                return res.status(400).json({ message: 'Invalid links format.' });
-            }
+            console.log('Parsed Modules:', parsedModules);
 
             // Handle uploaded files
             const courseImage = req.files?.image ? `/uploads/images/${req.files.image[0].filename}` : null;
@@ -210,12 +199,10 @@ router.post(
             let pdfIndex = 0;
 
             parsedModules.forEach((module) => {
-                // Ensure lessons array exists
-                module.lessons = module.lessons || [];
+                module.lessons = module.lessons || []; // Ensure lessons array exists
 
                 module.lessons.forEach((lesson) => {
-                    // Ensure lesson.images array exists
-                    lesson.images = lesson.images || [];
+                    lesson.images = lesson.images || []; // Ensure images array exists
 
                     if (req.files['lessonImages'] && req.files['lessonImages'][imageIndex]) {
                         lesson.images.push(`/uploads/images/${req.files['lessonImages'][imageIndex].filename}`);
