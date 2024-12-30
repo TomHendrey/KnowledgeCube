@@ -14,8 +14,11 @@ router.get('/creator/courses', verifyToken, checkRole(['creator']), async (req, 
             return res.status(401).json({ message: 'Unauthorized access.' });
         }
 
-        const courses = await Course.find({ creator: req.userId });
-        res.status(200).json({ courses });
+        // Fetch published and draft courses separately
+        const publishedCourses = await Course.find({ creator: req.userId, isDraft: false });
+        const draftCourses = await Course.find({ creator: req.userId, isDraft: true });
+
+        res.status(200).json({ publishedCourses, draftCourses });
     } catch (err) {
         console.error('Error fetching created courses:', err.message);
         res.status(500).json({
