@@ -214,10 +214,6 @@ h2 {
     transition: background-image 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-.publishDescription {
-    margin-top: 40px;
-}
-
 .addButton,
 .submitButton {
     font-family: 'Open Sans', sans-serif;
@@ -252,13 +248,6 @@ h2 {
 
 .submitButton:hover {
     background-image: linear-gradient(to right, #4daa88 0%, #0c773c 51%, #189e66 100%);
-}
-
-.submitButton:disabled:hover {
-    background-color: #ccc; /* Light gray background */
-    cursor: not-allowed; /* Change cursor to indicate it's not clickable */
-    box-shadow: none; /* Remove any shadows */
-    color: #d3d3d3; /* Adjust text color for better contrast */
 }
 
 .removeButton {
