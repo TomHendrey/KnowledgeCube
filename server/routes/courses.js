@@ -178,9 +178,21 @@ router.post(
         const { title, description, modules, links } = req.body;
 
         try {
-            // Only parse if `modules` is a string
-            const parsedModules = Array.isArray(modules) ? modules : JSON.parse(modules || '[]');
-            const parsedLinks = Array.isArray(links) ? links : JSON.parse(links || '[]');
+            // Parse modules and links
+            let parsedModules = [];
+            let parsedLinks = [];
+            try {
+                parsedModules = typeof modules === 'string' ? JSON.parse(modules) : modules;
+            } catch (error) {
+                console.error('Error parsing modules:', error.message);
+                return res.status(400).json({ message: 'Invalid modules format.' });
+            }
+            try {
+                parsedLinks = typeof links === 'string' ? JSON.parse(links) : links;
+            } catch (error) {
+                console.error('Error parsing links:', error.message);
+                return res.status(400).json({ message: 'Invalid links format.' });
+            }
 
             console.log('Parsed Modules:', parsedModules);
 
@@ -296,17 +308,17 @@ router.put(
             // Parse body data
             const { title, description, modules, links } = req.body;
 
-            // Parse modules and links
+            /// Parse modules and links
             let parsedModules = [];
             let parsedLinks = [];
             try {
-                parsedModules = modules ? JSON.parse(modules) : [];
+                parsedModules = typeof modules === 'string' ? JSON.parse(modules) : modules;
             } catch (error) {
                 console.error('Error parsing modules:', error.message);
                 return res.status(400).json({ message: 'Invalid modules format.' });
             }
             try {
-                parsedLinks = links ? JSON.parse(links) : [];
+                parsedLinks = typeof links === 'string' ? JSON.parse(links) : links;
             } catch (error) {
                 console.error('Error parsing links:', error.message);
                 return res.status(400).json({ message: 'Invalid links format.' });
