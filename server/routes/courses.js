@@ -291,12 +291,28 @@ router.put(
                 return res.status(400).json({ message: 'Invalid course ID.' });
             }
 
+            console.log('Updating draft with ID:', id);
+
             // Parse body data
             const { title, description, modules, links } = req.body;
 
-            // Parse modules and links if they exist
-            const parsedModules = modules ? JSON.parse(modules) : [];
-            const parsedLinks = links ? JSON.parse(links) : [];
+            // Parse modules and links
+            let parsedModules = [];
+            let parsedLinks = [];
+            try {
+                parsedModules = modules ? JSON.parse(modules) : [];
+            } catch (error) {
+                console.error('Error parsing modules:', error.message);
+                return res.status(400).json({ message: 'Invalid modules format.' });
+            }
+            try {
+                parsedLinks = links ? JSON.parse(links) : [];
+            } catch (error) {
+                console.error('Error parsing links:', error.message);
+                return res.status(400).json({ message: 'Invalid links format.' });
+            }
+
+            console.log('Parsed Modules:', parsedModules);
 
             // Handle uploaded files
             const courseImage = req.files?.image ? `/uploads/images/${req.files.image[0].filename}` : null;
@@ -308,19 +324,17 @@ router.put(
                 ? req.files.lessonImages.map((file) => `/uploads/images/${file.filename}`)
                 : [];
 
-            // Attach lesson images and PDFs to lessons (if provided)
+            // Attach lesson images and PDFs to lessons
             let imageIndex = 0;
             let pdfIndex = 0;
-
             parsedModules.forEach((module) => {
-                module.lessons = module.lessons || []; // Ensure lessons is always an array
+                module.lessons = module.lessons || [];
                 module.lessons.forEach((lesson) => {
                     lesson.images = lesson.images || [];
                     if (req.files['lessonImages'] && req.files['lessonImages'][imageIndex]) {
                         lesson.images.push(`/uploads/images/${req.files['lessonImages'][imageIndex].filename}`);
                         imageIndex++;
                     }
-
                     if (req.files['pdfs'] && req.files['pdfs'][pdfIndex]) {
                         lesson.pdf = `/uploads/pdfs/${req.files['pdfs'][pdfIndex].filename}`;
                         pdfIndex++;
@@ -329,8 +343,8 @@ router.put(
             });
 
             // Update the draft course
-            const updatedCourse = await Course.findOneAndUpdate(
-                { _id: id, creator: req.userId, isDraft: true },
+            const updatedCourse = await Course.findByIdAndUpdate(
+                id,
                 {
                     title,
                     description,
@@ -344,7 +358,7 @@ router.put(
             );
 
             if (!updatedCourse) {
-                return res.status(404).json({ message: 'Draft not found or unauthorized access.' });
+                return res.status(404).json({ message: 'Draft not found.' });
             }
 
             res.status(200).json({ message: 'Draft updated successfully.', draft: updatedCourse });
