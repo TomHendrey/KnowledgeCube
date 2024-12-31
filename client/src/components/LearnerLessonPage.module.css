@@ -33,7 +33,7 @@
 /* Header */
 .lessonHeader {
     text-align: left;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 
 .lessonHeader::after {
@@ -58,7 +58,7 @@
     font-size: 2rem;
     font-weight: bold;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 /* Lesson Description */

@@ -6,10 +6,29 @@ import Spinner from './Spinner';
 
 const LearnerDashboard = () => {
     const [enrolledCourses, setEnrolledCourses] = useState([]);
+    const [firstName, setFirstName] = useState('');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                // Fetch user data from the /me route
+                const response = await axiosInstance.get('/auth/me');
+                const user = response.data;
+                console.log('User data fetched:', user);
+
+                const fullName = user.name || '';
+                const extractedFirstName = fullName.split(' ')[0];
+                setFirstName(extractedFirstName);
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
+        fetchUserData();
+    }, []);
 
     useEffect(() => {
         const fetchCourses = async () => {
@@ -60,8 +79,9 @@ const LearnerDashboard = () => {
                 <h2 className={styles['page-header']}>Your Courses</h2>
                 <p className={styles['page-description']}>
                     {enrolledCourses.length === 0
-                        ? 'Start exploring courses to begin your learning journey.'
-                        : 'Here you can browse through your enrolled courses and keep track of your progress.'}
+                        ? `Welcome ${firstName}. Begin your journey today and start exploring courses
+                                        designed to broaden your knowledge and skills.`
+                        : `Welcome back ${firstName}. Here you can browse through your enrolled courses and keep track of your progress.`}
                 </p>
                 {loading && <Spinner />}
                 {error && <p className={styles['error']}>{error}</p>}
@@ -69,7 +89,7 @@ const LearnerDashboard = () => {
                     <div className={styles['course-list']}>
                         {enrolledCourses.length === 0 ? (
                             <div className={styles['no-courses-container']}>
-                                <h2 className={styles['no-courses-header']}>Discover New Learning Paths</h2>
+                                <p className={styles['no-courses-header']}>Discover New Learning Paths</p>
                                 <div className={styles['no-courses-content']}>
                                     <div
                                         className={styles['explore-card']}
@@ -79,10 +99,6 @@ const LearnerDashboard = () => {
                                         <h3 className={styles['explore-card-title2']}>Courses</h3>
                                         <div className={styles['explore-card-icon']}>🔍</div>
                                     </div>
-                                    <p className={styles['explore-text']}>
-                                        Begin your journey today and start exploring courses designed to broaden your
-                                        knowledge and skills.
-                                    </p>
                                 </div>
                             </div>
                         ) : (

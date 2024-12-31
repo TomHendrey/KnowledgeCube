@@ -13,30 +13,21 @@
     text-align: center;
 }
 
-.no-courses-container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 40px;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
 .no-courses-header {
     font-family: 'Playfair Display', serif;
-    font-size: 26px;
+    font-size: 22px;
     font-weight: 700;
     margin-bottom: 40px;
     color: #232526;
     text-align: center;
+    padding-left: 20px;
 }
 
 .no-courses-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+
     text-align: center;
 }
 
@@ -45,7 +36,7 @@
     font-weight: 700;
     color: #232526;
     margin-bottom: 30px;
-    margin-top: 50px;
+    margin-top: 30px;
     text-align: center;
 }
 
@@ -66,8 +57,8 @@
     color: #666;
     margin: 0 auto;
     padding: 0 10px;
-    max-width: 600px;
-    margin-bottom: 30px;
+    max-width: 700px;
+    margin-bottom: 25px;
 }
 
 .error {

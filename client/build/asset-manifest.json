@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.78b253f3.css",
-    "main.js": "/static/js/main.69ebbe8a.js",
+    "main.css": "/static/css/main.961cede0.css",
+    "main.js": "/static/js/main.1ed90311.js",
     "static/js/453.419a5d54.chunk.js": "/static/js/453.419a5d54.chunk.js",
     "static/media/map7.jpg": "/static/media/map7.390f645b516f56c89d44.jpg",
     "static/media/white_card_discover.jpg": "/static/media/white_card_discover.4aa16d5fd2e32997bb71.jpg",
     "index.html": "/index.html",
     "static/media/cube-03.svg": "/static/media/cube-03.859f40183964990e2de6bb77610da81d.svg",
     "static/media/whitecube01.svg": "/static/media/whitecube01.09fbed4b855f4fc466295f7fff218a1f.svg",
-    "main.78b253f3.css.map": "/static/css/main.78b253f3.css.map",
-    "main.69ebbe8a.js.map": "/static/js/main.69ebbe8a.js.map",
+    "main.961cede0.css.map": "/static/css/main.961cede0.css.map",
+    "main.1ed90311.js.map": "/static/js/main.1ed90311.js.map",
     "453.419a5d54.chunk.js.map": "/static/js/453.419a5d54.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.78b253f3.css",
-    "static/js/main.69ebbe8a.js"
+    "static/css/main.961cede0.css",
+    "static/js/main.1ed90311.js"
   ]
 }

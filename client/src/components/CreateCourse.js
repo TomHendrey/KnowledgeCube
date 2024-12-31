@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axiosInstance from '../axiosConfig.js';
 import { useNavigate } from 'react-router-dom';
 import styles from './CreateCourse.module.css';
 import ImageUpload from './ImageUpload.js';
 import PDFUpload from './PDFUpload.js';
+// import { createDraft, saveDraft } from '../services/draftService';
 
 const CreateCourse = () => {
     const [title, setTitle] = useState('');
@@ -12,6 +13,7 @@ const CreateCourse = () => {
     const [courseImage, setCourseImage] = useState(null);
     const [pdfs, setPdfs] = useState([]);
     const [message, setMessage] = useState('');
+    const [draftId, setDraftId] = useState(null);
     const navigate = useNavigate();
 
     // Add a new module
@@ -61,6 +63,56 @@ const CreateCourse = () => {
     // Handle image upload
     const handleCourseImageUpload = (file) => {
         setCourseImage(file); // Attach file for form submission
+    };
+
+    // Restore draft ID on component mount
+    useEffect(() => {
+        const savedDraftId = localStorage.getItem('draftId');
+        if (savedDraftId) {
+            setDraftId(savedDraftId);
+            console.log('Restored draft ID:', savedDraftId);
+        }
+    }, []);
+
+    const handleSaveDraft = async () => {
+        console.log('Modules before sending:', modules); // Log modules for debugging
+
+        const formData = new FormData();
+        formData.append('title', title || '');
+        formData.append('description', description || '');
+        if (courseImage) formData.append('image', courseImage);
+        pdfs.forEach((pdf) => formData.append('pdfs', pdf));
+
+        // Append the entire modules array as a JSON string
+        formData.append('modules', JSON.stringify(modules));
+
+        console.log('FormData for Save Draft:', Array.from(formData.entries())); // Log FormData entries
+
+        try {
+            if (draftId) {
+                console.log('Updating draft:', draftId);
+                const response = await axiosInstance.put(`/courses/draft/${draftId}`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },
+                });
+                setMessage(response.data.message);
+            } else {
+                console.log('Creating new draft...');
+                const response = await axiosInstance.post('/courses/draft', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },
+                });
+                setMessage(response.data.message);
+                setDraftId(response.data.draft._id); // Save new draft ID
+            }
+        } catch (err) {
+            console.error('Error saving draft:', err.response?.data || err.message);
+            setMessage(err.response?.data?.message || 'Error saving draft.');
+        }
     };
 
     // Handle form submission
@@ -139,8 +191,8 @@ const CreateCourse = () => {
         <div className={styles.container}>
             <h1 className={styles['page-header']}>Create a New Course</h1>
             <p className={styles['page-description']}>
-                Here you can use our course builder to create a course from scratch. Please complete at least one
-                mudule.
+                Here you can use our course builder to create your course. Please complete at least one module and
+                lesson.
             </p>
 
             <form onSubmit={handleSubmit} className={styles.createCourseForm}>
@@ -175,7 +227,7 @@ const CreateCourse = () => {
                 <hr className={styles.spacer} />
 
                 {/* Modules and Lessons */}
-                <h3>Content</h3>
+                <h3>Course Content</h3>
                 <p>All courses must have at leat one module.</p>
                 {modules.map((module, moduleIndex) => (
                     <div key={moduleIndex} className={styles.module}>
@@ -281,6 +333,10 @@ const CreateCourse = () => {
 
                 <button type="button" onClick={addModule} className={styles.addButton}>
                     Add Module
+                </button>
+                <div className={styles.moduleDivider}></div>
+                <button type="button" onClick={handleSaveDraft} className={`${styles.addButton} ${styles.draftButton}`}>
+                    {draftId ? 'Save Progress' : 'Create Draft'}
                 </button>
                 <div></div>
                 <button type="submit" className={`${styles.addButton} ${styles.submitButton}`}>

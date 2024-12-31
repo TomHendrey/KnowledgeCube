@@ -16,6 +16,7 @@ import LearnerLessonPage from './components/LearnerLessonPage';
 import CourseDiscovery from './components/CourseDiscovery';
 import CreatorLessonPage from './components/CreatorLessonPage';
 import styles from './App.module.css';
+import TestModules from './components/TestModules';
 
 const App = () => {
     const { role, handleLogin, handleLogout } = useContext(UserContext);
@@ -50,6 +51,7 @@ const App = () => {
 
                         {/* Shared routes */}
                         <Route path="/course-discovery" element={<CourseDiscovery />} />
+                        <Route path="/test-modules" element={<TestModules />} />
                     </Routes>
                 </main>
                 <footer>
