@@ -13,8 +13,8 @@ const LearnerLessonPage = () => {
     const [error, setError] = useState('');
     const [isCompleted, setIsCompleted] = useState(false);
 
+    // Will change to dynamic links
     const resources = [
-        { title: 'Additional Resources', url: '#' },
         { title: 'Contact Instructor', url: '#' },
         { title: 'Discussion Forum', url: '#' },
     ];
@@ -81,6 +81,7 @@ const LearnerLessonPage = () => {
                         </a>
                     )}
                     <div className={styles.sampleLinks}>
+                        <p className={styles.sampleHeader}>Aditional Resources:</p>
                         {resources.map((resource, index) => (
                             <a key={index} href={resource.url} className={styles.sampleLink}>
                                 {resource.title}
